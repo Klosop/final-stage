@@ -1,0 +1,46 @@
+<?php 
+include '../includes/koneksi.php'; 
+include '../includes/navbar.php';
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Beranda - Informasi Wisata Sulawesi Utara</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/script.js" defer></script>
+</head>
+<body>
+  <?php include '../includes/header.php'; ?>
+
+    <header>
+    <nav class="navbar">
+      <div class="logo">Info Wisata Lokal</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="anggota.html" class="active" aria-current="page">Daftar Anggota</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Tempat Wisata</h1>
+    <div class="grid">
+      <?php
+        $result = mysqli_query($conn, "SELECT * FROM wisata");
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo '
+          <div class="card">
+            <img src="../img/'.$row['gambar'].'" alt="'.$row['nama'].'">
+            <h3><a href="detail.php?id='.$row['id'].'">'.$row['nama'].'</a></h3>
+          </div>';
+        }
+      ?>
+    </div>
+  </main>
+
+  <?php include '../includes/footer.php'; ?>
+</body>
+</html>
